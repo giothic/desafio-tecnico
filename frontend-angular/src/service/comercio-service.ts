@@ -9,42 +9,50 @@ import { Comercio } from '@domain/comercio';
 })
 export class ComercioService {
 
-
     private apiUrl = `${environment.apiUrl}/comercios`;
 
     //------------------------------------------------
-    /** Construtor. */
+    /** Construtor */
     //------------------------------------------------
     constructor(private http: HttpClient) {}
 
     //------------------------------------------------
-    /** Recupera a lista de cidades */
+    /** Recupera a lista de comércios */
     //------------------------------------------------
     pesquisarComercios(): Observable<Comercio[]> {
         return this.http.get<Comercio[]>(this.apiUrl);
     }
 
     //------------------------------------------------
-    /** Exclui a cidade informada */
+    /** Recupera um comércio pelo ID */
     //------------------------------------------------
-    excluir(comercio: Comercio): Observable<any> {
-        const url = `${this.apiUrl}/${comercio.id}`; 
-        return this.http.delete(url);
+    pesquisarComercio(id: number): Observable<Comercio> {
+        const url = `${this.apiUrl}/${id}`;
+        return this.http.get<Comercio>(url);
     }
 
     //------------------------------------------------
-    /** Salva a cidade informada */
+    /** Exclui um comércio */
     //------------------------------------------------
+    excluirComercio(id: number): Observable<void> {
+        const url = `${this.apiUrl}/${id}`;
+        console.log('URL da requisição DELETE:', url);
+        return this.http.delete<void>(url);
+    }
 
-    salvar(comercio: Comercio): Observable<Comercio> {
+    //------------------------------------------------
+    /** Salva um novo comércio */
+    //------------------------------------------------
+    salvarComercio(comercio: Comercio): Observable<Comercio> {
+        console.log('Enviando para o back-end:', JSON.stringify(comercio));
         return this.http.post<Comercio>(this.apiUrl, comercio);
     }
 
-
-    atualizarComercio(comercio: Comercio): Observable<any> {
+    //------------------------------------------------
+    /** Atualiza um comércio existente */
+    //------------------------------------------------
+    atualizarComercio(comercio: Comercio): Observable<Comercio> {
         const url = `${this.apiUrl}/${comercio.id}`;
-        return this.http.put(url, comercio);
+        return this.http.put<Comercio>(url, comercio);
     }
-    
-    }
-
+}

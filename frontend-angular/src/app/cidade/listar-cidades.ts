@@ -32,8 +32,10 @@ export class ListarCidades implements OnInit {
     //-------------------------------------------------------------
     // Flag usada para mostrar/esconder a janela de cadastro
     //-------------------------------------------------------------
-    mostraJanelaCadastro: boolean = false;
-    mostraJanelaComercio: boolean = false;
+
+    mostraListaDeCidades: boolean = true; 
+    mostraJanelaCadastro: boolean = false; 
+    mostraJanelaComercio: boolean = false; 
 
     //--------------------------------------------------------------
     /** Construtor. Recebe os services usados pelo componente */
@@ -87,14 +89,19 @@ public abreJanelaParaAlterarCidade(cidade: Cidade): void {
 }
 
 
-public abreFormularioComercio(): void {
-    console.log('Botão "Novo comercio" clicado');
+public abreFormularioComercio(cidadeId: number): void {
+    console.log('Botão "Novo comércio" clicado');
     console.log('mostraJanelaComercio antes:', this.mostraJanelaComercio);
 
+    // Cria um novo objeto de comércio e define o id da cidade
     this.comercioSelecionado = new Comercio();
+    this.comercioSelecionado.cidadeId = cidadeId;  // Aqui você define o id da cidade no comércio
+
+    // Abre a janela de cadastro de comércio
     this.mostraJanelaComercio = true;
 
     console.log('mostraJanelaComercio depois:', this.mostraJanelaComercio);
+    console.log('Comércio selecionado:', this.comercioSelecionado);
 }
 
 //-------------------------------------------------------------------------------------
@@ -136,4 +143,16 @@ public fechaJanelaCadastro(salvou: boolean): void {
         this.pesquisarCidades();
     }
 }
+
+public fechaJanelaComercio(salvou: boolean): void {
+    console.log('Janela de cadastro fechada. Salvou?', salvou);
+
+    this.mostraJanelaComercio = false;
+
+    if (salvou) {
+        this.pesquisarCidades();
+    }
+}
+
+
 }

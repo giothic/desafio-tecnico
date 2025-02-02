@@ -105,6 +105,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {NgModule} from '@angular/core';
 import {ProjetoService} from '@service/projeto-service';
 import {MessageService} from 'primeng/api';
+import { ComercioService } from '@service/comercio-service';
 
 @NgModule({
   imports: [
@@ -320,7 +321,7 @@ import {MessageService} from 'primeng/api';
     InputIconModule,
     AutoFocusModule
   ],
-  providers: [ProjetoService, MessageService]
+  providers: [ProjetoService, ComercioService, MessageService]
 })
 export class ImportsModule {
 }

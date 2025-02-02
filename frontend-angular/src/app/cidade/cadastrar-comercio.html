@@ -1,7 +1,6 @@
 <!-- Modal (só aparece se comercio não for null) -->
 <div *ngIf="comercio" class="modal">
     <div class="modal-content">
-      <span class="close" (click)="cancelar()">&times;</span>
       <h2>{{ comercio.id ? 'Editar Comércio' : 'Cadastrar Comércio' }}</h2>
   
       <form (ngSubmit)="salvarComercio()">

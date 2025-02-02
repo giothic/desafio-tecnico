@@ -4,6 +4,7 @@ import { ProjetoService } from '@service/projeto-service';
 import { MessageService } from 'primeng/api';
 import { ImportsModule } from '../imports';
 import { ComercioService } from '@service/comercio-service';
+import { Cidade } from '@domain/cidade';
 
 export enum TipoComercio {
   FARMACIA = 'FARMACIA',
@@ -21,20 +22,26 @@ export enum TipoComercio {
 })
 export class CadastrarComercio {
 
+    cidadeSelecionada: Cidade = new Cidade();
+
     //-------------------------------------------------------
     // Parâmetro de entrada para o componente
     //-------------------------------------------------------
+
     @Input() set comercio(value: Comercio) {
         if (value) {
-            this._comercio = { ...value }; 
+            this._comercio = { ...value };  // Copia os dados de comercio
         } else {
-            this._comercio = new Comercio(); 
+            this._comercio = new Comercio();  // Caso o valor seja null ou undefined, inicializa um novo objeto Comercio
         }
     }
+    
     get comercio(): Comercio {
-        return this._comercio;
+        return this._comercio;  // Retorna o objeto comercio atual
     }
+    
     private _comercio: Comercio = new Comercio();
+    
 
     //-------------------------------------------------------
     // Evento lançado ao fechar a janela
@@ -49,13 +56,33 @@ export class CadastrarComercio {
     //--------------------------------------------------------------
     /** Método chamado ao clicar no botão 'salvar' */
     //--------------------------------------------------------------
-    public salvarComercio(): void {
+    public salvarComercio(cidade: Cidade): void {
         console.log('Método salvar chamado! Comércio:', this.comercio);
-
-        if (this.comercio.id) {
+    
+    
+        // Atribui o cidadeId ao objeto comercio, caso ainda não tenha sido atribuído
+        if (!this.comercio.cidadeId) {
+            this.comercio.cidadeId = cidade.id;
+        }
+    
+        // Se o id não estiver presente, isso indica que é um novo comércio
+        if (!this.comercio.id) {
+            console.log('Criando novo comércio...', this.comercio);
+        } else {
             console.log('Atualizando comércio...', this.comercio);
-
-            this.service.atualizarComercio(this.comercio).subscribe({
+        }
+    
+        // Formata o objeto comercio para enviar ao back-end
+        const comercioFormatado = {
+            ...this.comercio,
+            cidadeId: this.comercio.cidadeId // Garantindo que o cidadeId está presente
+        };
+    
+        console.log("Comércio formatado:", comercioFormatado);
+    
+        // Se o id estiver presente, chama o método de atualização, caso contrário, cria um novo comércio
+        if (this.comercio.id) {
+            this.service.atualizarComercio(comercioFormatado).subscribe({
                 next: (result): void => {
                     console.log('Resposta da API (PUT):', result);
                     this.messageService.add({
@@ -77,11 +104,8 @@ export class CadastrarComercio {
                     this.eventoFechaJanela.emit(true);
                 }
             });
-
         } else {
-            console.log('Criando novo comércio...', this.comercio);
-
-            this.service.salvar(this.comercio).subscribe({
+            this.service.salvarComercio(comercioFormatado).subscribe({
                 next: (result): void => {
                     console.log('✅ Resposta da API (POST):', result);
                     this.messageService.add({
@@ -100,11 +124,12 @@ export class CadastrarComercio {
                 },
                 complete: (): void => {
                     console.log('Requisição POST finalizada. Fechando janela...');
-                    this.eventoFechaJanela.emit(true); 
+                    this.eventoFechaJanela.emit(true);
                 }
             });
         }
     }
+    
 
     //--------------------------------------------------------------
     /** Método chamado ao clicar no botão 'cancelar' */

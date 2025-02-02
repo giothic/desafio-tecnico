@@ -10,8 +10,8 @@ export class Comercio {
     constructor(nome?: string, responsavel?: string, tipo?: TipoComercio, cidadeId?: number) {
       this.nome = nome || '';
       this.responsavel = responsavel || '';
-      this.tipo = tipo!;
-      this.cidadeId = cidadeId!;
+      this.tipo = tipo;
+      this.cidadeId = cidadeId;
     }
   }
   

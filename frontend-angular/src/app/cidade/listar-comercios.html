@@ -1,0 +1,36 @@
+<div>
+    <p-toast></p-toast> <!-- Componente do PrimeNG para exibir mensagens -->
+    <h2>Lista de Comércios</h2>
+
+
+
+        <p-table [value]="listaComercios">
+            <ng-template pTemplate="header">
+                <tr>
+                    <th>Nome</th>
+                    <th>Responsável</th>
+                    <th>Tipo</th>
+                    <th>Cidade</th> <!-- Mostramos o nome da cidade -->
+                    <th>Ações</th>
+                </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let=comercio>
+                <tr>
+                    <td>{{ comercio?.nome }}</td>
+                    <td>{{ comercio?.responsavel }}</td>
+                    <td>{{ comercio?.tipo }}</td>
+                    <td>{{ comercio?.cidadeId }}</td><!-- Aqui exibe o nome da cidade -->
+                    <td>
+                        <button pButton type="button" label="Alterar" (click)="abreJanelaParaAlterarComercio(comercio)"></button>
+                        <button pButton type="button" label="Excluir" (click)="excluirComercio(comercio)"></button>
+                    </td>
+                </tr>
+            </ng-template>
+        </p-table>   
+
+    <cadastrar-comercio
+        *ngIf="mostraJanelaComercio"
+        [comercio]="comercioSelecionado"
+        (onClose)="fechaJanelaComercio($event)">
+    </cadastrar-comercio>
+</div>

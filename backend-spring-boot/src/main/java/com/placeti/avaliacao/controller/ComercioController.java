@@ -38,7 +38,7 @@ public class ComercioController {
     /** Endpoint para buscar um comércio pelo ID */
     //----------------------------------------------------------
     @GetMapping("/{id}")
-    public ResponseEntity<ComercioDTO> pesquisarComercio(@PathVariable Long id) {
+    public ResponseEntity<ComercioDTO> buscarPeloId(@PathVariable Long id) {
         ComercioDTO comercioDTO = comercioService.pesquisarComercio(id);
         if (comercioDTO != null) {
             return ResponseEntity.ok(comercioDTO);
@@ -50,9 +50,9 @@ public class ComercioController {
     //----------------------------------------------------------
     /** Endpoint para excluir um comércio pelo ID */
     //----------------------------------------------------------
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Void> excluirComercio(@PathVariable Long id) {
-        comercioService.excluirComercio(id);
+    @DeleteMapping("/{idComercio}")
+    public ResponseEntity<Void> excluirComercio(@PathVariable Long idComercio) {
+        comercioService.excluirComercio(idComercio);
         return ResponseEntity.noContent().build();
     }
 }
