@@ -1,3 +1,5 @@
+
+
 export class Comercio {
     id?: number;
     nome: string = '';
@@ -21,3 +23,4 @@ export class Comercio {
     
   }
   
+

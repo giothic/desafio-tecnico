@@ -1,11 +1,11 @@
-<!-- cidade.component.html -->
 <div>
-    <p-toast></p-toast>
+    <p-toast></p-toast> <!-- Componente do PrimeNG para exibir mensagens -->
 
     <h2>Lista de Cidades</h2>
 
     <!-- Botões para adicionar cidade e listar comércios -->
     <button pButton type="button" label="Nova Cidade" (click)="abreJanelaParaCadastrarNovaCidade()"></button>
+    <button pButton type="button" label="Listar Comércios" (click)="abreListaComercios()"></button>
 
     <!-- Tabela de cidades -->
     <p-table [value]="listaCidades">
@@ -25,6 +25,7 @@
                 <td>
                     <button pButton type="button" label="Alterar" (click)="abreJanelaParaAlterarCidade(cidade)"></button>
                     <button pButton type="button" label="Excluir" (click)="excluir(cidade)"></button>
+                    <button pButton type="button" label="Adicionar Comércio" (click)="abreFormularioComercio(comercio)"></button>
                 </td>
             </tr>
         </ng-template>
@@ -36,4 +37,17 @@
         [cidade]="cidadeSelecionada"
         (onClose)="fechaJanelaCadastro($event)">
     </cadastrar-cidade>
+
+    <!-- Janela de cadastro de comércio -->
+    <cadastrar-comercio
+        *ngIf="mostraJanelaComercio"
+        [comercio]="comercioSelecionado"
+        (onClose)="fechaJanelaComercio($event)">
+    </cadastrar-comercio>
+
+    <!-- Lista de comércios -->
+    <listar-comercios
+        *ngIf="abreListaComercios"
+        (onClose)="fechaListaComercios()">
+    </listar-comercios>
 </div>

@@ -1,0 +1,30 @@
+<!-- Modal (só aparece se comercio não for null) -->
+<div *ngIf="comercio" class="modal">
+    <div class="modal-content">
+      <span class="close" (click)="cancelar()">&times;</span>
+      <h2>{{ comercio.id ? 'Editar Comércio' : 'Cadastrar Comércio' }}</h2>
+  
+      <form (ngSubmit)="salvarComercio()">
+        <div>
+          <label for="nome">Nome:</label>
+          <input id="nome" [(ngModel)]="comercio.nome" name="nome" required />
+        </div>
+  
+        <div>
+          <label for="responsavel">Responsável:</label>
+          <input id="responsavel" [(ngModel)]="comercio.responsavel" name="responsavel" required />
+        </div>
+  
+        <div>
+          <label for="tipo">Tipo:</label>
+          <select id="tipo" [(ngModel)]="comercio.tipo" name="tipo">
+            <option *ngFor="let tipo of tipoComercioEnum" [value]="tipo">{{ tipo | titlecase }}</option>
+          </select>
+        </div>
+  
+        <button type="submit">Salvar</button>
+        <button type="button" (click)="cancelar()">Cancelar</button>
+      </form>
+    </div>
+  </div>
+  

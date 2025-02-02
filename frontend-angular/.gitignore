@@ -1,0 +1,19 @@
+# Dependências do Node.js
+node_modules/
+package-lock.json
+
+# Build e output
+dist/
+out-tsc/
+*.log
+
+# Configurações do ambiente
+src/environments/environment.ts
+
+# Configurações do editor
+.vscode/
+.idea/
+*.swp
+
+# Cache do Angular CLI
+.angular/

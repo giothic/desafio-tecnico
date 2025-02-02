@@ -3,7 +3,9 @@ import { ImportsModule } from '../imports';
 import { Cidade } from '@domain/cidade';
 import { ProjetoService } from '@service/projeto-service';
 import { CadastrarCidade } from './cadastrar-cidade';
+import { CadastrarComercio } from './cadastrar-comercio';
 import { MessageService } from 'primeng/api';
+import { Comercio } from '@domain/comercio';
 
 //-------------------------------------------------------------------------------------
 /** Tela para listar cidades */
@@ -12,7 +14,7 @@ import { MessageService } from 'primeng/api';
     selector: 'listar-cidades',
     templateUrl: 'listar-cidades.html',
     standalone: true,
-    imports: [ImportsModule, CadastrarCidade],
+    imports: [ImportsModule, CadastrarCidade, CadastrarComercio],
     providers: [ProjetoService, MessageService]
 })
 export class ListarCidades implements OnInit {
@@ -25,11 +27,13 @@ export class ListarCidades implements OnInit {
     // Atributo que guarda a cidade que foi selecionada na tabela
     //-------------------------------------------------------------
     cidadeSelecionada: Cidade = new Cidade();
+    comercioSelecionado: Comercio = new Comercio();
 
     //-------------------------------------------------------------
     // Flag usada para mostrar/esconder a janela de cadastro
     //-------------------------------------------------------------
     mostraJanelaCadastro: boolean = false;
+    mostraJanelaComercio: boolean = false;
 
     //--------------------------------------------------------------
     /** Construtor. Recebe os services usados pelo componente */
@@ -65,6 +69,13 @@ public abreJanelaParaCadastrarNovaCidade(): void {
     this.mostraJanelaCadastro = true;
 }
 
+public abreListaComercios(): void {
+    console.log('Botão "Nova Cidade" clicado');
+    
+    this.cidadeSelecionada = new Cidade();
+    this.mostraJanelaComercio = true;
+}
+
 //-------------------------------------------------------------------------------------
 // Método chamado ao clicar no botão 'Alterar'
 //-------------------------------------------------------------------------------------
@@ -73,6 +84,17 @@ public abreJanelaParaAlterarCidade(cidade: Cidade): void {
 
     this.cidadeSelecionada = { ...cidade };
     this.mostraJanelaCadastro = true;
+}
+
+
+public abreFormularioComercio(): void {
+    console.log('Botão "Novo comercio" clicado');
+    console.log('mostraJanelaComercio antes:', this.mostraJanelaComercio);
+
+    this.comercioSelecionado = new Comercio();
+    this.mostraJanelaComercio = true;
+
+    console.log('mostraJanelaComercio depois:', this.mostraJanelaComercio);
 }
 
 //-------------------------------------------------------------------------------------
