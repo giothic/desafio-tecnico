@@ -1,0 +1,18 @@
+<div>
+    <form (ngSubmit)="salvar()">
+        <div>
+            <label for="nome">Nome:</label>
+            <input id="nome" [(ngModel)]="cidade.nome" name="nome" required />
+        </div>
+        <div>
+            <label for="uf">UF:</label>
+            <input id="uf" [(ngModel)]="cidade.uf" name="uf" required />
+        </div>
+        <div>
+            <label for="capital">Capital:</label>
+            <input id="capital" type="checkbox" [(ngModel)]="cidade.capital" name="capital" />
+        </div>
+        <button type="submit">Salvar</button>
+        <button type="button" (click)="cancelar()">Cancelar</button>
+    </form>
+</div>

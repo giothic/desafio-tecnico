@@ -1,0 +1,39 @@
+<!-- cidade.component.html -->
+<div>
+    <p-toast></p-toast>
+
+    <h2>Lista de Cidades</h2>
+
+    <!-- Botões para adicionar cidade e listar comércios -->
+    <button pButton type="button" label="Nova Cidade" (click)="abreJanelaParaCadastrarNovaCidade()"></button>
+
+    <!-- Tabela de cidades -->
+    <p-table [value]="listaCidades">
+        <ng-template pTemplate="header">
+            <tr>
+                <th>Nome</th>
+                <th>UF</th>
+                <th>Capital</th>
+                <th>Ações</th>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-cidade>
+            <tr>
+                <td>{{ cidade.nome }}</td>
+                <td>{{ cidade.uf }}</td>
+                <td>{{ cidade.capital ? 'Sim' : 'Não' }}</td>
+                <td>
+                    <button pButton type="button" label="Alterar" (click)="abreJanelaParaAlterarCidade(cidade)"></button>
+                    <button pButton type="button" label="Excluir" (click)="excluir(cidade)"></button>
+                </td>
+            </tr>
+        </ng-template>
+    </p-table>
+
+    <!-- Janela de cadastro de cidade -->
+    <cadastrar-cidade
+        *ngIf="mostraJanelaCadastro"
+        [cidade]="cidadeSelecionada"
+        (onClose)="fechaJanelaCadastro($event)">
+    </cadastrar-cidade>
+</div>
