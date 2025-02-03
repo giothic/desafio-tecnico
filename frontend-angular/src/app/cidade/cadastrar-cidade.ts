@@ -9,7 +9,8 @@ import { ImportsModule } from '../imports';
     templateUrl: 'cadastrar-cidade.html',
     standalone: true,
     imports: [ImportsModule],
-    providers: [ProjetoService]
+    providers: [ProjetoService],
+    styleUrls: ['./styles/cidade-form.css']
 })
 export class CadastrarCidade {
 

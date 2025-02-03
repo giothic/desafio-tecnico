@@ -1,5 +1,5 @@
 <!-- Modal (só aparece se comercio não for null) -->
-<div *ngIf="comercio" class="modal">
+<div *ngIf="comercio" class="form-group">
     <div class="modal-content">
       <h2>{{ comercio.id ? 'Editar Comércio' : 'Cadastrar Comércio' }}</h2>
   
@@ -16,7 +16,7 @@
   
         <div>
           <label for="tipo">Tipo:</label>
-          <select id="tipo" [(ngModel)]="comercio.tipo" name="tipo">
+          <select id="tipo" [(ngModel)]="comercio.tipo" name="tipo" class="styled-select">
             <option *ngFor="let tipo of tipoComercioEnum" [value]="tipo">{{ tipo | titlecase }}</option>
           </select>
         </div>

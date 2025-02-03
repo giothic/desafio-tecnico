@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router'; // Importando o RouterModule
+import { RouterModule } from '@angular/router'; 
 
 @Component({
   selector: 'app-root',
@@ -11,7 +11,28 @@ import { RouterModule } from '@angular/router'; // Importando o RouterModule
     </nav>
     <router-outlet></router-outlet> <!-- Exibe os componentes de acordo com a rota -->
   `,
-  standalone: true, // Indica que este componente é independente
-  imports: [RouterModule] // Adicionando o RouterModule aqui
+  standalone: true, 
+  imports: [RouterModule],
+  styles: [`
+    h1 {
+      color: #333;
+      text-align: center;
+    }
+    nav {
+      background-color: #f9fafb;
+      padding: 10px;
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+    nav a {
+      color: #3b82f6;
+      text-decoration: none;
+      font-size: 16px;
+    }
+    nav a:hover {
+      color:rgb(39, 102, 203);
+    }
+  `]
 })
 export class AppComponent {}

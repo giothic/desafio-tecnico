@@ -86,4 +86,19 @@ public class ComercioService {
         dto.setCidadeId(comercio.getCidade().getId());
         return dto;
     }
+
+    public void alterarComercio(ComercioDTO comercioDto) {
+        Comercio comercioExistente = comercioRepository.findById(comercioDto.getId())
+            .orElseThrow(() -> new RuntimeException("Comércio não encontrado"));
+    
+
+        comercioExistente.setNome(comercioDto.getNome());
+        comercioExistente.setResponsavel(comercioDto.getResponsavel());
+        comercioExistente.setTipo(comercioDto.getTipo());
+        comercioExistente.setCidade(cidadeRepository.findById(comercioDto.getCidadeId())
+            .orElseThrow(() -> new RuntimeException("Cidade não encontrada")));
+    
+
+        comercioRepository.save(comercioExistente);
+    }
 }

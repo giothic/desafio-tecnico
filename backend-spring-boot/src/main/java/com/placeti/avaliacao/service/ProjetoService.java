@@ -62,16 +62,13 @@ public class ProjetoService {
     /** Método chamado para alterar os dados de uma cidade */
     //----------------------------------------------------------
     public void alterarCidade(CidadeDTO cidadeDto) {
-        // Acessa o ID a partir da instância cidadeDto
         Cidade cidadeExistente = cidadeRepository.findById(cidadeDto.getId())
             .orElseThrow(() -> new RuntimeException("Cidade não encontrada"));
     
-        // Atualiza os dados da cidade usando a instância cidadeDto
         cidadeExistente.setNome(cidadeDto.getNome());
         cidadeExistente.setUf(cidadeDto.getUf());
         cidadeExistente.setCapital(cidadeDto.isCapital());
     
-        // Salva a cidade atualizada
         cidadeRepository.save(cidadeExistente);
     }
 

@@ -34,8 +34,8 @@ export class ComercioService {
     //------------------------------------------------
     /** Exclui um comércio */
     //------------------------------------------------
-    excluirComercio(id: number): Observable<void> {
-        const url = `${this.apiUrl}/${id}`;
+    excluirComercio(comercio : Comercio): Observable<any> {
+        const url = `${this.apiUrl}/${comercio.id}`;
         console.log('URL da requisição DELETE:', url);
         return this.http.delete<void>(url);
     }
@@ -51,8 +51,8 @@ export class ComercioService {
     //------------------------------------------------
     /** Atualiza um comércio existente */
     //------------------------------------------------
-    atualizarComercio(comercio: Comercio): Observable<Comercio> {
+    atualizarComercio(comercio: Comercio): Observable<any> {
         const url = `${this.apiUrl}/${comercio.id}`;
-        return this.http.put<Comercio>(url, comercio);
+        return this.http.put(url, comercio);
     }
 }

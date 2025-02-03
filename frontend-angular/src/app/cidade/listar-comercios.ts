@@ -4,6 +4,9 @@ import { Comercio } from '@domain/comercio';
 import { ProjetoService } from '@service/projeto-service';
 import { MessageService } from 'primeng/api';
 import { ComercioService } from '@service/comercio-service';
+import { CadastrarComercio } from './cadastrar-comercio';
+import { HttpClient } from '@angular/common/http';
+import { Injectable } from '@angular/core';
 
 //-------------------------------------------------------------------------------------
 // Tela para listar comércios
@@ -12,7 +15,7 @@ import { ComercioService } from '@service/comercio-service';
     selector: 'listar-comercios',
     templateUrl: 'listar-comercios.html',
     standalone: true,
-    imports: [ImportsModule],
+    imports: [ImportsModule, CadastrarComercio,],
     providers: [ComercioService, MessageService]
 })
 export class ListarComercios implements OnInit {
@@ -30,7 +33,6 @@ export class ListarComercios implements OnInit {
     // Flag usada para mostrar/esconder a janela de cadastro
     //-------------------------------------------------------------
     mostraJanelaComercio: boolean = false;
-    mostraListaDeComercios: boolean = true;
     comercio: Comercio[];
 
 
@@ -54,31 +56,6 @@ export class ListarComercios implements OnInit {
       }
       
     
-    
-    private carregarCidades(): void {
-        this.serviceCidade.pesquisarCidades().subscribe({
-            next: (cidades) => {
-                this.listaDeCidades = cidades
-                    .filter((cidade) => cidade.id !== undefined) 
-                    .map((cidade) => ({
-                        id: cidade.id as number, 
-                        nome: cidade.nome
-                    }));
-    
-                console.log("Cidades carregadas:", this.listaDeCidades);
-            },
-            error: (error) => {
-                console.error('Erro ao carregar cidades:', error);
-            }
-        });
-    }
-    
-    
-    private getNomeCidade(cidadeId: number): string {
-        const cidade = this.listaDeCidades.find(c => c.id === cidadeId);
-        return cidade ? cidade.nome : 'Desconhecido';
-    }
-    
 
     private pesquisarComercios(): void {
         this.service.pesquisarComercios().subscribe({
@@ -96,10 +73,10 @@ export class ListarComercios implements OnInit {
     // Método chamado ao clicar no botão 'Alterar'
     //-------------------------------------------------------------------------------------
     public abreJanelaParaAlterarComercio(comercio: Comercio): void {
-        console.log('Botão "Alterar" clicado para o comércio:', comercio);
-
+        console.log('Antes de abrir:', this.mostraJanelaComercio);
         this.comercioSelecionado = { ...comercio };
         this.mostraJanelaComercio = true;
+        console.log('Depois de abrir:', this.mostraJanelaComercio);
     }
 
     //-------------------------------------------------------------------------------------
@@ -112,7 +89,7 @@ export class ListarComercios implements OnInit {
     
 
     
-        this.service.excluirComercio(comercio.id).subscribe({
+        this.service.excluirComercio(comercio).subscribe({
             next: () => {
                 console.log('Comércio excluído com sucesso:', comercio);
                 this.messageService.add({
@@ -121,7 +98,7 @@ export class ListarComercios implements OnInit {
                     detail: `Comércio '${comercio.nome}' excluído com sucesso!`
                 });
     
-                // Atualiza a lista de comércios após a exclusão
+
                 this.pesquisarComercios();
             },
             error: (error: any) => {
