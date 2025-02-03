@@ -6,6 +6,7 @@ export class Comercio {
     responsavel: string = '';
     tipo: TipoComercio;
     cidadeId: number;
+    
   
     constructor(nome?: string, responsavel?: string, tipo?: TipoComercio, cidadeId?: number) {
       this.nome = nome || '';

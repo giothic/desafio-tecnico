@@ -103,7 +103,8 @@ export class CadastrarCidade {
     /** Método chamado ao clicar no botão 'cancelar' */
     //-------------------------------------------------------------------------------------
     public cancelar(): void {
-        console.log('🔙 Cancelando cadastro. Fechando janela...');
-        this.eventoFechaJanela.emit(false); // Fecha a janela sem salvar
-    }
+        console.log('Cancelando cadastro. Fechando janela...');
+        this.eventoFechaJanela.emit(false);
+}
+
 }

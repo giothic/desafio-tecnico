@@ -6,7 +6,7 @@ import lombok.Data;
 //-------------------------------------------------
 /** DTO que guarda os dados de uma cidade */
 //-------------------------------------------------
-@Data // Inclui @Getter, @Setter, @ToString, @EqualsAndHashCode e @RequiredArgsConstructor
+@Data 
 public class CidadeDTO {
 
     //---------------------------------------

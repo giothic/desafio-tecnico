@@ -93,11 +93,10 @@ public abreFormularioComercio(cidadeId: number): void {
     console.log('Botão "Novo comércio" clicado');
     console.log('mostraJanelaComercio antes:', this.mostraJanelaComercio);
 
-    // Cria um novo objeto de comércio e define o id da cidade
-    this.comercioSelecionado = new Comercio();
-    this.comercioSelecionado.cidadeId = cidadeId;  // Aqui você define o id da cidade no comércio
 
-    // Abre a janela de cadastro de comércio
+    this.comercioSelecionado = new Comercio();
+    this.comercioSelecionado.cidadeId = cidadeId;  
+
     this.mostraJanelaComercio = true;
 
     console.log('mostraJanelaComercio depois:', this.mostraJanelaComercio);

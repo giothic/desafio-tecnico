@@ -1,18 +1,28 @@
-<div class="form-group">
-    <form (ngSubmit)="salvar()">
-        <div>
+<div class="modal-overlay">
+    <div class="modal">
+      <button class="close-btn" (click)="cancelar()">×</button>
+      <h2>{{ cidade.id ? 'Editar Cidade' : 'Cadastrar Cidade' }}</h2>
+      <div class="form-group">
+        <form (ngSubmit)="salvar()">
+          <div>
             <label for="nome">Nome:</label>
             <input id="nome" [(ngModel)]="cidade.nome" name="nome" required />
-        </div>
-        <div>
+          </div>
+          <div>
             <label for="uf">UF:</label>
             <input id="uf" [(ngModel)]="cidade.uf" name="uf" required />
-        </div>
-        <div>
+          </div>
+          <div>
             <label for="capital">Capital:</label>
             <input id="capital" type="checkbox" [(ngModel)]="cidade.capital" name="capital" />
-        </div>
-        <button type="submit">Salvar</button>
-        <button type="button" (click)="cancelar()">Cancelar</button>
-    </form>
-</div>
+            <span>Sim</span>
+          </div>
+          <div class="botoes">
+            <button type="submit">Salvar</button>
+            <button type="button" (click)="cancelar()">Cancelar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+  

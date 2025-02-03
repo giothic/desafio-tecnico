@@ -13,4 +13,5 @@ import org.springframework.stereotype.Repository;
 public interface ComercioRepository extends JpaRepository<Comercio, Long> {
 
             static final List<Comercio> comercios = new ArrayList<>();
+            
 }

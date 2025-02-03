@@ -9,7 +9,7 @@ import { RouterModule } from '@angular/router';
       <a routerLink="/listar-cidades">Listar Cidades</a>
       <a routerLink="/listar-comercios">Listar Comercios</a>
     </nav>
-    <router-outlet></router-outlet> <!-- Exibe os componentes de acordo com a rota -->
+    <router-outlet></router-outlet> 
   `,
   standalone: true, 
   imports: [RouterModule],

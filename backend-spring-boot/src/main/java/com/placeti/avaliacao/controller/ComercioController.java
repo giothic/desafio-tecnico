@@ -47,6 +47,10 @@ public class ComercioController {
         }
     }
 
+        //----------------------------------------------------------
+    /** Endpoint para editar um comércio pelo ID */
+    //----------------------------------------------------------
+
     @PutMapping("/{id}")
 public ResponseEntity<Void> alterarComercio(@PathVariable Long id, @RequestBody ComercioDTO comercioDto) {
     comercioDto.setId(id);

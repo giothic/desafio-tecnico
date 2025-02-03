@@ -50,7 +50,7 @@ export class ListarComercios implements OnInit {
         this.pesquisarComercios();
 
         this.service.pesquisarComercios().subscribe((dados) => {
-          console.log(dados); // Verifique se os dados estão corretos
+          console.log(dados); 
           this.comercio = dados;
         });
       }

@@ -10,7 +10,7 @@
                     <th>Nome</th>
                     <th>Responsável</th>
                     <th>Tipo</th>
-                    <th>Cidade</th> <!-- Mostramos o nome da cidade -->
+                    <th>Cidade</th>
                     <th>Ações</th>
                 </tr>
             </ng-template>
@@ -19,10 +19,11 @@
                     <td>{{ comercio.nome }}</td>
                     <td>{{ comercio.responsavel }}</td>
                     <td>{{ comercio.tipo }}</td>
-                    <td>{{ comercio.cidadeId }}</td><!-- Aqui exibe o nome da cidade -->
+                    <td>{{ comercio.cidadeId }}</td>
                     <td>
-                        <button pButton type="button" label="Alterar" (click)="abreJanelaParaAlterarComercio(comercio)"></button>
-                        <button pButton type="button" label="Excluir" (click)="excluirComercio(comercio)"></button>
+                        <button pButton type="button" label="Alterar" (click)="abreJanelaParaAlterarComercio(comercio)"style="margin: 0px 10px;"></button>
+                        <button pButton type="button" label="Excluir" (click)="excluirComercio(comercio)" 
+                        style="margin: 0px 10px; background-color: rgb(155, 0, 0); color: white;"></button>
                     </td>
                 </tr>
             </ng-template>
